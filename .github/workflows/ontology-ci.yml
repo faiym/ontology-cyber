@@ -1,0 +1,24 @@
+name: Ontology CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate-ontology:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check ontology file exists
+        run: |
+          test -f ontology/axioms.ttl
+          echo "Ontology file found."
+
+      - name: Show ontology file
+        run: |
+          cat ontology/axioms.ttl
